@@ -39,7 +39,7 @@ define Package/kalibrate-rtl
   $(call Package/kalibrate-rtl/Default)
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+fftw3
+  DEPENDS:=+fftw3 +librtlsdr
 endef
 
 define Package/kalibrate-rtl/description
