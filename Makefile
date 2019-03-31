@@ -28,6 +28,7 @@ define Build/Prepare
         mkdir -p $(PKG_BUILD_DIR)
         $(CP) /home/openwrt/tmp/kalibrate-rtl/* $(PKG_BUILD_DIR)/
         (cd $(PKG_BUILD_DIR) && ./bootstrap)
+        sed -i 's/arm\*/mips\*/' $(PKG_BUILD_DIR)/configure.ac
 endef
 
 define  Build/Configure
@@ -39,7 +40,7 @@ define Package/kalibrate-rtl
   $(call Package/kalibrate-rtl/Default)
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+fftw3 +librtlsdr
+  DEPENDS:=+fftw3 +librtlsdr +libstdcpp
 endef
 
 define Package/kalibrate-rtl/description
@@ -61,7 +62,7 @@ endef
 
 define Package/kalibrate-rtl/install
         $(INSTALL_DIR) $(1)/usr/bin
-        $(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/usr/bin
+        $(INSTALL_BIN) $(PKG_BUILD_DIR)/src/kal $(1)/usr/bin
 #       $(INSTALL_DIR) $(1)/etc/multimon-ng
 #       $(INSTALL_DATA) ./files/multimon-ng.template $(1)/etc/multimon-ng/config.template
 endef
