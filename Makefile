@@ -27,6 +27,7 @@ endef
 define Build/Prepare
 #        mkdir -p $(PKG_BUILD_DIR)
 #        $(CP) /home/openwrt/tmp/kalibrate-rtl/* $(PKG_BUILD_DIR)/
+        $(call Build/Prepare/Default)
         (cd $(PKG_BUILD_DIR) && ./bootstrap)
         sed -i 's/arm\*/mips\*/' $(PKG_BUILD_DIR)/configure.ac
 endef
